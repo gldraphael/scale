@@ -1,0 +1,19 @@
+[project]
+name = "scale"
+version = "0.1.0"
+description = "This repository contains Jupyter notebooks to experiment with the obesity levels dataset."
+
+requires-python = ">=3.9"
+# readme = "README.md"
+
+classifiers = [
+    "Private :: For educational use only."
+]
+
+dependencies = [
+    "ipykernel>=6.29.5",
+    "ipympl>=0.9.6",
+    "jupyter>=1.1.1",
+    "matplotlib>=3.9.4",
+    "pandas>=2.2.3",
+]
