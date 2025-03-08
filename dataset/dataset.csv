@@ -1,4 +1,4 @@
-sex,age,height,weight,has_family_history,freq_high_calorie_intake,veg_in_meals,num_meals,food_bw_meals,smoker,water_intake,monitors_calories,physical_act_freq,screen_time,alcohol_freq,transportation,target_obs_level
+sex,age,height,weight,has_family_history,freq_high_calorie_intake,veg_in_meals,num_meals,food_bw_meals,is_smoker,water_intake,monitors_calories,physical_act_freq,screen_time,alcohol_freq,transportation,target_obs_level
 Female,21,1.62,64,yes,no,2,3,Sometimes,no,2,no,0,1,no,Public_Transportation,Normal_Weight
 Female,21,1.52,56,yes,no,3,3,Sometimes,yes,3,yes,3,0,Sometimes,Public_Transportation,Normal_Weight
 Male,23,1.8,77,yes,no,2,3,Sometimes,no,2,no,2,1,Frequently,Public_Transportation,Normal_Weight
