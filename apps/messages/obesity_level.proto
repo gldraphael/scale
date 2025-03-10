@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package dev.galdin.scale;
+
+enum ObesityLevel {
+    InsufficientWeight,
+    NormalWeight,
+    OverweightLevel1,
+    OverweightLevel2,
+    ObesityType1,
+    ObesityType2,
+    ObesityType3,
+}

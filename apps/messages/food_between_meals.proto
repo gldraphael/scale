@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package dev.galdin.scale;
+
+enum FoodBetweenMeals {
+    Always,
+    Frequently,
+    Sometimes,
+    Never
+}
