@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package dev.galdin.scale;
+
+import "classify_obesity_level_request.proto";
+import "classify_obesity_level_response.proto";
+
+service ScaleService {
+  rpc ClassifyObesityLevel(ClassifyObesityLevelRequest) returns (ClassifyObesityLevelResponse);
+}
