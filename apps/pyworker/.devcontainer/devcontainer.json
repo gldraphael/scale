@@ -1,5 +1,5 @@
 {
-  "name": "scale-notebooks (Jupyter)",
+  "name": "scale-pyworker (python)",
   "build": {
       "context": "..",
       "dockerfile": "Dockerfile",
@@ -25,7 +25,8 @@
             "redhat.vscode-yaml",
             "shardulm94.trailing-spaces",
             "tamasfe.even-better-toml",
-            "mechatroner.rainbow-csv"
+            "mechatroner.rainbow-csv",
+            "tooltitudeteam.tooltitude-pb"
           ]
       }
   },
