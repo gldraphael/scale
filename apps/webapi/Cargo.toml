@@ -1,0 +1,15 @@
+[package]
+name = "scaleapi"
+version = "0.1.0"
+edition = "2021"
+
+
+[dependencies]
+axum = { version = "0.8.1", features = ["macros"] }
+serde = { version = "1.0", features = ["derive"] }
+tokio = { version = "1.0", features = ["full"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+utoipa = { version = "5.3.1", features = ["axum_extras"] }
+utoipa-axum = "0.2.0"
+utoipa-scalar = { version = "0.3", features = ["axum"] }
