@@ -57,7 +57,7 @@ enum FoodBetweenMeals {
     #[serde(rename = "always")]     Always, 
     #[serde(rename = "frequently")] Frequently, 
     #[serde(rename = "sometimes")]  Sometimes, 
-    #[serde(rename = "Never")]      Never
+    #[serde(rename = "never")]      Never
 }
 #[derive(Deserialize, ToSchema)]
 enum AlcoholFrequency {
@@ -80,7 +80,7 @@ enum ObesityLevel {
     #[serde(rename = "insufficient_weight")] InsufficientWeight, 
     #[serde(rename = "normal_weight")]       NormalWeight, 
     #[serde(rename = "overweight_level_1")]  OverweightLevel1, 
-    #[serde(rename = "overweight_level_2")]  Overweight2Level2,
+    #[serde(rename = "overweight_level_2")]  OverweightLevel2,
     #[serde(rename = "obesity_type_1")]      ObesityType1, 
     #[serde(rename = "obesity_type_2")]      ObesityType2, 
     #[serde(rename = "obesity_type_3")]      ObesityType3, 

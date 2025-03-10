@@ -1,0 +1,17 @@
+[project]
+name = "scale-pyworker"
+version = "0.1.0"
+
+requires-python = ">=3.9"
+# readme = "README.md"
+
+classifiers = [
+    "Private :: For educational use only."
+]
+
+dependencies = [
+    "category-encoders>=2.6.4",
+    "pandas>=2.2.3",
+    "scikit-learn>=1.6.1",
+    "scipy>=1.13.1"
+]
