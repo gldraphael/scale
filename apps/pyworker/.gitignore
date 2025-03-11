@@ -1,5 +1,8 @@
 # Environments
 .venv
 
+# Generated protobuf files
+gen/
+
 # bytecode
 __pycache__
