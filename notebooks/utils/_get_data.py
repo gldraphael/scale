@@ -1,6 +1,6 @@
 import pandas
 
-from constants import DATASET_CSV_PATH
+from utils.constants import DATASET_CSV_PATH
 
 def get_data(csv_path = DATASET_CSV_PATH) -> pandas.DataFrame:
     csv = pandas.read_csv(csv_path)
