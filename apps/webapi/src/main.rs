@@ -4,6 +4,9 @@ use utoipa::OpenApi;
 use utoipa_axum::router::OpenApiRouter;
 use utoipa_scalar::{Scalar, Servable};
 
+mod gen {
+    tonic::include_proto!("dev.galdin.scale");
+}
 
 pub mod api;
 
