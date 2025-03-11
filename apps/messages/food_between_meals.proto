@@ -3,8 +3,8 @@ syntax = "proto3";
 package dev.galdin.scale;
 
 enum FoodBetweenMeals {
-    Always,
-    Frequently,
-    Sometimes,
-    Never
+    NEVER      = 0;
+    SOMETIMES  = 1;
+    FREQUENTLY = 2;
+    ALWAYS     = 3;
 }
