@@ -2,8 +2,20 @@
 // README at: https://github.com/devcontainers/templates/tree/main/src/rust
 {
 	"name": "scale-webapi (Rust)",
-	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	"image": "mcr.microsoft.com/devcontainers/rust:1-1-bookworm"
+	"build": {
+        "context": "..",
+		"dockerfile": "Dockerfile",
+		"args": {
+          "IMAGE_TAG": "1-1-bookworm"
+      }
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"tooltitudeteam.tooltitude-pb"
+			]
+		}
+	}
 
 	// Use 'mounts' to make the cargo cache persistent in a Docker Volume.
 	// "mounts": [

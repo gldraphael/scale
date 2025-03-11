@@ -5,7 +5,7 @@ from grpclib.server import Server
 
 class ScaleService(ScaleServiceBase):
     async def classify_obesity_level(self, request: ClassifyObesityLevelRequest) -> ClassifyObesityLevelResponse:
-        return ObesityLevel.NORMAL_WEIGHT
+        return ClassifyObesityLevelResponse(level=ObesityLevel.NORMAL_WEIGHT)
 
 async def main():
     server = Server([ScaleService()])
