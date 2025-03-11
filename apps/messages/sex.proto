@@ -3,6 +3,6 @@ syntax = "proto3";
 package dev.galdin.scale;
 
 enum Sex {
-    Male,
-    Female
+    MALE   = 0;
+    FEMALE = 1;
 }

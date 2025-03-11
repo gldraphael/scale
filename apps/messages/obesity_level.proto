@@ -3,11 +3,11 @@ syntax = "proto3";
 package dev.galdin.scale;
 
 enum ObesityLevel {
-    InsufficientWeight,
-    NormalWeight,
-    OverweightLevel1,
-    OverweightLevel2,
-    ObesityType1,
-    ObesityType2,
-    ObesityType3,
+    INSUFFICIENT_WEIGHT = 0;
+    NORMAL_WEIGHT       = 1;
+    OVERWEIGHT_LEVEL_1  = 2;
+    OVERWEIGHT_LEVEL_2  = 3;
+    OBESITY_TYPE_1      = 4;
+    OBESITY_TYPE_2      = 5;
+    OBESITY_TYPE_3      = 6;
 }

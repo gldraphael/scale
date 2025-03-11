@@ -11,7 +11,13 @@ classifiers = [
 
 dependencies = [
     "category-encoders>=2.6.4",
+    "grpcio>=1.71.0",
     "pandas>=2.2.3",
     "scikit-learn>=1.6.1",
-    "scipy>=1.13.1"
+    "scipy>=1.13.1",
+]
+
+[dependency-groups]
+dev = [
+    "grpcio-tools>=1.71.0",
 ]
