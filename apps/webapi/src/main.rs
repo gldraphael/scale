@@ -25,6 +25,7 @@ async fn main() -> Result<(), Error> {
 
         .split_for_parts();
 
+
     let router = router
         .merge(Scalar::with_url("/", api));
 
