@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package dev.galdin.scale;
+
+enum Transportation {
+    WALKING       = 0;
+    BIKE          = 1;
+    PUBLIC_TRANSPORTATION = 2;
+    MOTORBIKE     = 3;
+    AUTOMOBILE    = 4;
+}
+
