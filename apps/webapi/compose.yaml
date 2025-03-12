@@ -4,4 +4,7 @@ services:
       context: ..
       dockerfile: ./webapi/Dockerfile
     ports:
-      - 8808:8080
+      - 8808:8808
+    environment:
+      - SCALE_SERVER_PORT=8808
+      - SCALE_CLASSIFIER_HOST=http://pyworker:8807

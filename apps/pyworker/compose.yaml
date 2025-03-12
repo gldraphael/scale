@@ -1,9 +1,12 @@
 services:
-  python:
+  pyworker:
     build:
       context: ..
       dockerfile: ./pyworker/Dockerfile
     ports:
-      - 8807:50051
+      - 8807:8807
+    environment:
+      - SCALE_SERVER__PORT=8807
+      - SCALE_MODEL_PATH=./models/obs-v0.1.0.pkl
     volumes:
       - ../../models:/app/models
