@@ -1,13 +1,16 @@
 import asyncio
 from grpclib.server import Server
 from scale.services import ScaleService
+from config import settings
 
 async def main():
-    print("Loading the model...")
-    ScaleService.load(model_path="./models/obs-v0.1.0.pkl")
+    
+    print(f"Loading model: {settings.model_path}")
+    ScaleService.load(model_path=settings.model_path)
+    
     server = Server([ScaleService()])
-    await server.start("127.0.0.1", 50051)
-    print("Server starting at port 50051")
+    print(f"Starting server at: {settings.server.host}:{settings.server.port}")
+    await server.start(settings.server.host, settings.server.port)
     await server.wait_closed()
 
 if __name__ == '__main__':

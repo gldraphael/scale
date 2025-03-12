@@ -11,6 +11,7 @@ classifiers = [
 
 dependencies = [
     "betterproto>=v2.0.0-beta7",
+    "dynaconf>=3.2.10",
     "joblib>=1.4.2",
     "pandas>=2.2.3",
     "scikit-learn>=1.6.1",

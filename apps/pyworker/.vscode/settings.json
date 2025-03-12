@@ -1,6 +1,7 @@
 {
     "explorer.fileNesting.patterns": {
-        "pyproject.toml": "uv.lock, .python-version"
+        "pyproject.toml": "uv.lock, .python-version",
+        "settings.yaml": ".secrets.yaml"
     },
     "explorer.fileNesting.enabled": true
 }

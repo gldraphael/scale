@@ -1,0 +1,9 @@
+services:
+  python:
+    build:
+      context: ..
+      dockerfile: ./pyworker/Dockerfile
+    ports:
+      - 8807:50051
+    volumes:
+      - ../../models:/app/models
