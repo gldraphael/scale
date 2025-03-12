@@ -1,0 +1,7 @@
+services:
+  webapi:
+    build:
+      context: ..
+      dockerfile: ./webapi/Dockerfile
+    ports:
+      - 8808:8080

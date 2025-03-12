@@ -12,7 +12,8 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"tooltitudeteam.tooltitude-pb"
+				"tooltitudeteam.tooltitude-pb",
+				"ms-azuretools.vscode-docker"
 			]
 		}
 	}
