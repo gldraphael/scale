@@ -1,0 +1,3 @@
+include:
+  - ./apps/pyworker/compose.yaml
+  - ./apps/webapi/compose.yaml

@@ -6,3 +6,6 @@ dev/
 
 # bytecode
 __pycache__
+
+# Ignore dynaconf secret files
+.secrets.*
