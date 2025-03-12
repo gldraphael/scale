@@ -1,5 +1,5 @@
 INPUT_DIR=../messages
-OUTPUT_DIR=./src/scale/gen
+OUTPUT_DIR=./src
 
 mkdir -p $OUTPUT_DIR
 protoc \
