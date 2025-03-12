@@ -1,3 +1,8 @@
 include:
   - ./apps/pyworker/compose.yaml
   - ./apps/webapi/compose.yaml
+
+# services:
+#   debug:
+#     image: debian:bookworm-slim
+#     entrypoint: sleep infinity

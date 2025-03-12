@@ -16,6 +16,7 @@ WORKDIR /app
 # COPY ./.cargo ./.cargo
 COPY ./webapi/Cargo.toml ./webapi/Cargo.lock ./webapi/build.rs ./
 COPY ./messages /messages
+COPY ./webapi/settings.yaml ./
 COPY ./webapi/src ./src
 ENV RUSTFLAGS="-C target-feature=+crt-static"
 RUN cargo build --release --target "x86_64-unknown-linux-gnu" 
@@ -32,6 +33,7 @@ COPY --from=builder /users/passwd.nobody /etc/passwd
 USER nobody
 
 WORKDIR /app
+COPY --from=builder /app/settings.yaml ./
 COPY --from=builder /app/target/x86_64-unknown-linux-gnu/release/scaleapi /app/scaleapi
 
 ENTRYPOINT ["./scaleapi"]

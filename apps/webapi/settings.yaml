@@ -1,0 +1,3 @@
+# Nested props are not properly supported... see: https://github.com/rust-cli/config-rs/issues/391
+server_port: 8080
+classifier_host: http://host.docker.internal:50051

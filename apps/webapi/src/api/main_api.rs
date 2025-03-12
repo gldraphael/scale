@@ -1,6 +1,7 @@
 use axum::{
-    http::StatusCode, Json, debug_handler
+    http::StatusCode, Json, extract::State, debug_handler
 };
+use config::Config;
 use serde::{Deserialize, Serialize};
 use strum_macros::FromRepr;
 use utoipa::ToSchema;
@@ -13,8 +14,10 @@ mod gen {
     tonic::include_proto!("dev.galdin.scale");
 }
 
-pub(crate) fn router() -> OpenApiRouter {
-    return OpenApiRouter::new().routes(routes!(classify));
+pub(crate) fn router(config: Config) -> OpenApiRouter {
+    return OpenApiRouter::new()
+        .routes(routes!(classify))
+        .with_state(config);
 }
 
 #[utoipa::path(
@@ -25,9 +28,12 @@ pub(crate) fn router() -> OpenApiRouter {
     )
 )]
 #[debug_handler]
-async fn classify(Json(req): Json<ClassificationRequest>) 
+async fn classify(State(config): State<Config>, Json(req): Json<ClassificationRequest>) 
      -> (StatusCode, Json<ClassificationResult>) {  
-        let mut client = ScaleServiceClient::connect("http://host.docker.internal:50051").await.unwrap();
+        let classifier_host = config
+            .get_string("classifier_host")
+            .unwrap();
+        let mut client = ScaleServiceClient::connect(classifier_host).await.unwrap();
         let request = tonic::Request::new( ClassifyObesityLevelRequest{
             age: req.age.into(),
             num_meals: req.num_meals as u32,
@@ -68,6 +74,7 @@ struct ClassificationRequest {
     alcohol_freq: AlcoholFrequency,
     transportation: Transportation
 }
+
 #[derive(Serialize, ToSchema)]
 struct ClassificationResult {
     level: ObesityLevel
@@ -89,6 +96,7 @@ enum FoodBetweenMeals {
     Frequently = 2, 
     Always = 3, 
 }
+
 #[derive(Deserialize, ToSchema)]
 #[serde(rename_all = "snake_case")]
 enum AlcoholFrequency {
@@ -97,6 +105,7 @@ enum AlcoholFrequency {
     Frequently = 2, 
     Always = 3,
 }
+
 #[derive(Deserialize, ToSchema)]
 #[serde(rename_all = "snake_case")]
 enum Transportation {
