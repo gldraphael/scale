@@ -6,6 +6,9 @@ on:
       context:
         required: true
         type: string
+      dockerfile:
+        required: true
+        type: string
       image:
         required: true
         type: string
@@ -48,6 +51,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: ${{ inputs.context }}
+          file: ${{ inputs.dockerfile }}
           push: ${{ inputs.push }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
