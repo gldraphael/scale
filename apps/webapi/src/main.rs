@@ -1,6 +1,8 @@
 use std::{io::Error, net::{Ipv4Addr, SocketAddr}};
 use config::{Config, FileFormat};
 use tokio::net::TcpListener;
+use tower_http::cors::{CorsLayer, Any};
+use tower::ServiceBuilder;
 use utoipa::OpenApi;
 use utoipa_axum::router::OpenApiRouter;
 use utoipa_scalar::{Scalar, Servable};
@@ -22,7 +24,7 @@ async fn main() -> Result<(), Error> {
         )
         .build()
         .unwrap();
-    
+
     #[derive(OpenApi)]
     #[openapi(
         info(
@@ -35,10 +37,13 @@ async fn main() -> Result<(), Error> {
         .merge(api::main_api::router(settings.clone()))
         .split_for_parts();
 
-
+    let cors = CorsLayer::new()
+        .allow_methods(Any)
+        .allow_headers(Any)
+        .allow_origin(Any);
     let router = router
-        .merge(Scalar::with_url("/", api));
-
+        .merge(Scalar::with_url("/", api))
+        .layer(ServiceBuilder::new().layer(cors));
 
     let port = settings.get_int("server_port").unwrap() as u16;
     let address = SocketAddr::from((Ipv4Addr::UNSPECIFIED, port));
