@@ -12,7 +12,7 @@ jobs:
   docker:
     uses: ./.github/workflows/docker.yaml
     with:
-      context: ./rust
+      context: ./apps
       push: ${{ startsWith(github.ref, 'refs/tags/v') }}
       image: gldraphael/scale-webapi
     permissions:
