@@ -1,0 +1,310 @@
+import { Flex, Text, Link, Button, Box, TextField, RadioCards } from "@radix-ui/themes";
+import { useState } from 'react';
+import clamp from "./utils/clamp";
+import { ApiService, Frequency, ObesityLevel, Sex, Transportation } from "./services/ApiService";
+
+export default function Steps({ githubUrl }: {githubUrl: string}){
+    const [currentStep, setCurrentStep] = useState(0)
+
+    const [age, setAge] = useState(18);
+    const [sex, setSex] = useState<Sex>('male');
+    const [height, setHeight] = useState(185);
+    const [weight, setWeight] = useState(65);
+    const [hasFamilyHistory, setHasFamilyHistory] = useState(false);
+
+    const [waterIntake, setWaterIntake] = useState(2.5);
+    const [monitorsCalories, setMonitorsCalories] = useState(false);
+    const [numMainMeals, setNumMainMeals] = useState(3);
+    const [foodBwMeals, setFoodBwMeals] = useState<Frequency>("frequently")
+    const [numMainMealsWithVeg, setNumMainMealsWithVeg] = useState(0);
+
+    const [isSmoker, setIsSmoker] = useState(false);
+    const [screenTime, setScreenTime] = useState(2);
+    const [alcoholFreq, setAlcoholFreq] = useState<Frequency>("sometimes")
+    const [physicalActivityFreq, setPhysicalActivityFreq] = useState(1)
+    const [travel, setTravel] = useState<Transportation>("automobile")
+
+    const [response, setResponse] = useState<ObesityLevel|null>(null);
+    
+    const api = new ApiService()
+
+    switch(currentStep) {
+      case 0:
+        return (
+          <Flex direction="column" gap="4" p="4">
+            <Text>
+              This is an experimental classifier designed to predict obesity levels using a range of metrics beyond just height and weight.
+            </Text>
+            <Text>
+              Details about the dataset, model training, and implementation are available <Link href={githubUrl}>here</Link>. 
+            </Text>
+            <Text>
+              Feel free to play with different input values. 
+            </Text>
+            <Button autoFocus onClick={() => setCurrentStep(currentStep+1)}>Ok, I'm ready!</Button>
+            
+          </Flex>
+        )
+      case 1:
+        return (
+          <Flex direction="column" gap="4" p="4">
+            <Text size="5"></Text>
+
+          <Box>
+            <label>Your age</label>
+            <TextField.Root
+              autoFocus
+              type="number"
+              min="12"
+              max={120}
+              defaultValue={age}
+              onChange={(e) => setAge(clamp(Number.parseInt(e.target.value), 12, 120))}
+              aria-label="Age"
+            />
+          </Box>
+
+          <Box>
+            <label>Sex</label>
+            <RadioCards.Root
+              value={sex}
+              onValueChange={val => setSex(val as Sex)}
+              aria-label="Sex"
+            >
+              <RadioCards.Item value="male">
+                <label>Male</label>
+              </RadioCards.Item>
+              <RadioCards.Item value="female">
+                <label>Female</label>
+              </RadioCards.Item>
+            </RadioCards.Root>
+          </Box>
+
+          <Box>
+            <label>Height (cm)</label>
+            <TextField.Root
+              type="number"
+              min={100}
+              max={200}
+              defaultValue={height}
+              onChange={(e) => setHeight(clamp(Number.parseInt(e.target.value), 100, 200))}
+              aria-label="Height"
+            />
+          </Box>
+
+          <Box>
+            <label>Weight (kg)</label>
+            <TextField.Root
+              defaultValue={weight}
+              onChange={(e) => setWeight(clamp(Number.parseInt(e.target.value), 20, 200))}
+              aria-label="Weight"
+            />
+          </Box>
+
+          <Box>
+            <label>Does your family have a history of overweight or obesity, such as in your parents or other close relatives?</label>
+            <RadioCards.Root
+              value={hasFamilyHistory.toString()}
+              onValueChange={(val) => setHasFamilyHistory(val.toLowerCase() == 'true')}
+              aria-label="Sex"
+            >
+              <RadioCards.Item value='true'>
+                <label>Yes</label>
+              </RadioCards.Item>
+              <RadioCards.Item value='false'>
+                <label>No</label>
+              </RadioCards.Item>
+            </RadioCards.Root>
+          </Box>
+
+            <Button onClick={() => setCurrentStep(currentStep+1)}>Next</Button>
+          </Flex>
+        )
+      case 2:
+        return (
+          <Flex direction="column" gap="4" p="4">
+            <Text size="5">Diet</Text> 
+
+            <Box>
+              <label>Do you monitor your calorie intake?</label>
+              <RadioCards.Root autoFocus
+                value={monitorsCalories.toString()}
+                onValueChange={(val) => setMonitorsCalories(val.toLowerCase() == 'true')}
+                aria-label="Do you monitor calories?"
+              >
+                <RadioCards.Item value='true'>
+                  <label>Yes</label>
+                </RadioCards.Item>
+                <RadioCards.Item value='false'>
+                  <label>No</label>
+                </RadioCards.Item>
+              </RadioCards.Root>
+            </Box>
+
+            <Box>
+              <label>How often do you eat foods that are high in calories?</label>
+              <RadioCards.Root
+                value={hasFamilyHistory.toString()} // freq
+                onValueChange={(val) => setHasFamilyHistory(val.toLowerCase() == 'true')}
+                aria-label="Hih calorie food frequency"
+              >
+                <RadioCards.Item value='true'>
+                  <label>Yes</label>
+                </RadioCards.Item>
+                <RadioCards.Item value='false'>
+                  <label>No</label>
+                </RadioCards.Item>
+              </RadioCards.Root>
+            </Box>
+
+            
+            <Box>
+              <label>How many main meals do you typically eat in a day</label>
+              <TextField.Root
+                defaultValue={numMainMeals}
+                onChange={(e) => setNumMainMeals(clamp(Number.parseInt(e.target.value), 1, 5))}
+                aria-label="Number of main meals"
+              />
+            </Box>
+
+            <Box>
+              <label>How many of these meals include vegetables?</label>
+              <TextField.Root
+                defaultValue={numMainMealsWithVeg}
+                onChange={(e) => setNumMainMealsWithVeg(clamp(Number.parseInt(e.target.value), 0, numMainMeals))}
+                aria-label="Number of main meals with vegetables"
+              />
+            </Box>
+
+            <Box>
+              <label>Do you usually snack or eat anything between your main meals?</label>
+              <RadioCards.Root
+                defaultValue={foodBwMeals} // freq
+                onValueChange={val => setFoodBwMeals(val as Frequency)}
+                aria-label="Number of snack meals">
+                  <RadioCards.Item value="never"><label>Never</label></RadioCards.Item>
+                  <RadioCards.Item value="sometimes"><label>Sometimes</label></RadioCards.Item>
+                  <RadioCards.Item value="frequently"><label>Frequently</label></RadioCards.Item>
+                  <RadioCards.Item value="always"><label>Always</label></RadioCards.Item>
+                </RadioCards.Root>
+            </Box>
+
+            <Box>
+              <label>How much water do you drink each day? (litres)</label>
+              <TextField.Root
+                defaultValue={waterIntake}
+                onChange={(e) => setWaterIntake(clamp(Number.parseInt(e.target.value), 12, 120))}
+                aria-label="Water intake"
+              />
+            </Box>
+
+            <Button onClick={() => setCurrentStep(currentStep+1)}>Next</Button>
+          </Flex>
+        )
+      case 3:
+        return (
+          <Flex direction="column" gap="4" p="4">
+            <Text size="5">Lifestyle</Text>                         
+
+            <Box>
+              <label>Do you smoke?</label>
+              <RadioCards.Root
+                value={isSmoker.toString()}
+                onValueChange={(val) => setIsSmoker(val.toLowerCase() == 'true')}
+                aria-label="Do you smoke?"
+              >
+                <RadioCards.Item value='true'>
+                  <label>Yes</label>
+                </RadioCards.Item>
+                <RadioCards.Item value='false'>
+                  <label>No</label>
+                </RadioCards.Item>
+              </RadioCards.Root>
+            </Box>
+
+            <Box>
+              <label>How often do you consume alcohol?</label>
+              <RadioCards.Root
+                value={alcoholFreq}
+                onValueChange={val => setAlcoholFreq(val as Frequency)}
+                aria-label="Alcohol consumption frequency"
+              >
+                <RadioCards.Item value="never"><label>Never</label></RadioCards.Item>
+                <RadioCards.Item value="sometimes"><label>Sometimes</label></RadioCards.Item>
+                <RadioCards.Item value="frequently"><label>Frequently</label></RadioCards.Item>
+                <RadioCards.Item value="always"><label>Always</label></RadioCards.Item>
+              </RadioCards.Root>
+            </Box>
+
+            <Box>
+            <label>How often do you engage in physical activity?</label>
+            <TextField.Root
+              type="number"
+              min={0}
+              max={3}
+              autoFocus
+              defaultValue={physicalActivityFreq}
+              onChange={(e) => setPhysicalActivityFreq(clamp(Number.parseInt(e.target.value), 0, 3))}
+              aria-label="Age"
+            />
+          </Box>
+
+            <Box>
+              <label>What's your daily screen-time across all devices? (hours)</label>
+              <TextField.Root
+                defaultValue={screenTime}
+                onChange={(e) => setScreenTime(clamp(Number.parseInt(e.target.value), 100, 200))}
+                aria-label="Screen time per day"
+              />
+            </Box>
+
+            <Box>
+              <label>How do you usually travel?</label>
+              <RadioCards.Root
+                value={travel}
+                onValueChange={val => setTravel(val as Transportation)}
+                aria-label="Travel"
+              >
+                <RadioCards.Item value="walking"><label>Walking</label></RadioCards.Item>
+                <RadioCards.Item value="public_transportation"><label>Public transportation</label></RadioCards.Item>
+                <RadioCards.Item value="bike"><label>Bike</label></RadioCards.Item>
+                <RadioCards.Item value="motorbike"><label>Motorbike</label></RadioCards.Item>
+                <RadioCards.Item value="automobile"><label>Automobile</label></RadioCards.Item>
+              </RadioCards.Root>
+            </Box>
+            <Button onClick={
+              async () => {
+                  setResponse((await api.classify({
+                    age: age,
+                    food_bw_meals: foodBwMeals,
+                    sex: sex,
+                    weight: weight,
+                    height: height,
+                    alcohol_freq: alcoholFreq,
+                    is_smoker: isSmoker,
+                    monitors_calories: monitorsCalories,
+                    num_meals: numMainMeals,
+                    veg_in_meals: numMainMealsWithVeg,
+                    physical_act_freq: physicalActivityFreq,
+                    screen_time: screenTime,
+                    transportation: travel,
+                    water_intake: waterIntake
+                  })).level)
+                  setCurrentStep(currentStep + 1)
+                }
+              }>Submit</Button>
+          </Flex>
+        )
+      case 4:
+        return(
+          <Flex direction="column">
+            <Box height="200px">
+              {response}
+            </Box>
+          </Flex>
+        )
+        
+      default:
+        setCurrentStep(0)
+        return
+    }
+};
