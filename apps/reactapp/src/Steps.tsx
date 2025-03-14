@@ -1,6 +1,5 @@
 import { Flex, Text, Link, Button, Box, TextField, RadioCards } from "@radix-ui/themes";
 import { useState } from 'react';
-import clamp from "./utils/clamp";
 import { ApiService, Frequency, ObesityLevel, Sex, Transportation } from "./services/ApiService";
 
 export default function Steps({ githubUrl }: {githubUrl: string}){
@@ -58,7 +57,7 @@ export default function Steps({ githubUrl }: {githubUrl: string}){
               min="12"
               max={120}
               defaultValue={age}
-              onChange={(e) => setAge(clamp(Number.parseInt(e.target.value), 12, 120))}
+              onChange={(e) => setAge(Number.parseInt(e.target.value))}
               aria-label="Age"
             />
           </Box>
@@ -86,7 +85,7 @@ export default function Steps({ githubUrl }: {githubUrl: string}){
               min={100}
               max={200}
               defaultValue={height}
-              onChange={(e) => setHeight(clamp(Number.parseInt(e.target.value), 100, 200))}
+              onChange={(e) => setHeight(Number.parseInt(e.target.value))}
               aria-label="Height"
             />
           </Box>
@@ -95,7 +94,7 @@ export default function Steps({ githubUrl }: {githubUrl: string}){
             <label>Weight (kg)</label>
             <TextField.Root
               defaultValue={weight}
-              onChange={(e) => setWeight(clamp(Number.parseInt(e.target.value), 20, 200))}
+              onChange={(e) => setWeight(Number.parseInt(e.target.value))}
               aria-label="Weight"
             />
           </Box>
@@ -140,7 +139,7 @@ export default function Steps({ githubUrl }: {githubUrl: string}){
               </RadioCards.Root>
             </Box>
 
-            <Box>
+            {/* <Box>
               <label>How often do you eat foods that are high in calories?</label>
               <RadioCards.Root
                 value={hasFamilyHistory.toString()} // freq
@@ -154,14 +153,17 @@ export default function Steps({ githubUrl }: {githubUrl: string}){
                   <label>No</label>
                 </RadioCards.Item>
               </RadioCards.Root>
-            </Box>
+            </Box> */}
 
             
             <Box>
               <label>How many main meals do you typically eat in a day</label>
               <TextField.Root
+                type="number"
+                min={1}
+                max={5}
                 defaultValue={numMainMeals}
-                onChange={(e) => setNumMainMeals(clamp(Number.parseInt(e.target.value), 1, 5))}
+                onChange={(e) => setNumMainMeals(Number.parseInt(e.target.value))}
                 aria-label="Number of main meals"
               />
             </Box>
@@ -169,8 +171,11 @@ export default function Steps({ githubUrl }: {githubUrl: string}){
             <Box>
               <label>How many of these meals include vegetables?</label>
               <TextField.Root
+                type="number"
+                min={0}
+                max={numMainMeals}
                 defaultValue={numMainMealsWithVeg}
-                onChange={(e) => setNumMainMealsWithVeg(clamp(Number.parseInt(e.target.value), 0, numMainMeals))}
+                onChange={(e) => setNumMainMealsWithVeg(Number.parseInt(e.target.value))}
                 aria-label="Number of main meals with vegetables"
               />
             </Box>
@@ -191,8 +196,11 @@ export default function Steps({ githubUrl }: {githubUrl: string}){
             <Box>
               <label>How much water do you drink each day? (litres)</label>
               <TextField.Root
+                type="number"
+                min={0}
+                max={5}
                 defaultValue={waterIntake}
-                onChange={(e) => setWaterIntake(clamp(Number.parseInt(e.target.value), 12, 120))}
+                onChange={(e) => setWaterIntake(Number.parseInt(e.target.value))}
                 aria-label="Water intake"
               />
             </Box>
@@ -243,7 +251,7 @@ export default function Steps({ githubUrl }: {githubUrl: string}){
               max={3}
               autoFocus
               defaultValue={physicalActivityFreq}
-              onChange={(e) => setPhysicalActivityFreq(clamp(Number.parseInt(e.target.value), 0, 3))}
+              onChange={(e) => setPhysicalActivityFreq(Number.parseInt(e.target.value))}
               aria-label="Age"
             />
           </Box>
@@ -251,8 +259,11 @@ export default function Steps({ githubUrl }: {githubUrl: string}){
             <Box>
               <label>What's your daily screen-time across all devices? (hours)</label>
               <TextField.Root
+                type="number"
+                min={0}
+                max={4}
                 defaultValue={screenTime}
-                onChange={(e) => setScreenTime(clamp(Number.parseInt(e.target.value), 100, 200))}
+                onChange={(e) => setScreenTime(Number.parseInt(e.target.value))}
                 aria-label="Screen time per day"
               />
             </Box>
