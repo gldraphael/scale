@@ -7,7 +7,7 @@
 version: 2
 updates:
 - package-ecosystem: devcontainers
-  directories: ["/notebooks", "/apps/pyworker", "/apps/webapi"]
+  directories: ["/notebooks", "/apps/pyworker", "/apps/webapi", "/apps/reactapp"]
   schedule:
     interval: weekly
 - package-ecosystem: pip
