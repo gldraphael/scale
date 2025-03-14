@@ -1,6 +1,11 @@
+import "@radix-ui/themes/styles.css";
 import './Layout.css'
-import { Flex, Button, Text, Heading, Code, Card, Link, Box } from '@radix-ui/themes'
+
+import { Flex, Text, Heading, Code, Card, Link, Container, Theme, Box } from '@radix-ui/themes'
+import { ThemeProvider } from "next-themes"
 import GitHubButton from 'react-github-btn'
+
+import Steps from './Steps'
 
 export default function Layout() {
 
@@ -8,37 +13,36 @@ export default function Layout() {
 
   return (
     <>
-      <Flex direction="column" gap="2" minHeight="100vh">
+      <ThemeProvider attribute="class">
+        <Theme accentColor="purple" grayColor="mauve" radius="large" scaling="110%">
+          <Container size="1">
+            <Flex direction="column" gap="2" minHeight="100vh">
 
-        <Heading mt="4">
-          <Code size={'7'}>scale</Code>
-        </Heading>
+              <Heading mt="6">
+                <Code size={'7'}>scale</Code>
+              </Heading>
 
-        <Flex mb="auto" mt="auto" >
-          <Card>
-            <Flex direction="column" gap="4" p="4">
-              <Text>
-                <Code>scale</Code> is an experimental classifier designed to predict obesity levels using a range of metrics beyond just height and weight.
-              </Text>
-              <Text>
-                Details about the dataset, model training, and implementation are available <Link href={GITHUB_URL}>here</Link>. 
-              </Text>
-              <Button>Play</Button>
+              <Flex mb="auto" mt="auto" >
+                <Card>
+                  <Steps githubUrl={GITHUB_URL} />
+                </Card>
+              </Flex>
+
+              <Flex className='footer' gap="4" my="4" align="center" >
+                  <Text size="1" mr="auto">
+                  This project is <Link href={GITHUB_URL}>open source</Link>.<br/>
+                  To read about dataset limitations, <Link href="#">click here</Link>. 
+                  </Text>
+                  <Box pt="7px">
+                    <GitHubButton href="https://github.com/gldraphael/scale" data-color-scheme="no-preference: light; light: light; dark: dark;" aria-label="Star gldraphael/scale on GitHub">&nbsp;Star</GitHubButton>
+                  </Box>
+                  
+              </Flex>
+          
             </Flex>
-          </Card>
-        </Flex>
-
-        <Box className="footer" my="4">
-            <Flex gap="4" align="center" justify="center">
-                <Text size="1">
-                This project is <Link href={GITHUB_URL}>open source on GitHub</Link>. 
-                </Text>
-                <GitHubButton href="https://github.com/gldraphael/scale" data-color-scheme="no-preference: light; light: light; dark: dark;" data-size="large" aria-label="Star gldraphael/scale on GitHub">&nbsp;Star</GitHubButton>
-            </Flex>
-            
-        </Box>
-        
-      </Flex>
+          </Container>
+        </Theme>
+    </ThemeProvider>
     </>
   )
 }
