@@ -1,6 +1,7 @@
 export class ApiService {
     async classify(req: ClassificationRequest): Promise<ClassificationResponse> {
-        const response = await fetch('http://localhost:8808/classify', {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const response = await fetch(`${(window as any).config.ApiBase}/classify`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
