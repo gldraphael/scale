@@ -1,0 +1,9 @@
+services:
+  reactapp:
+    build:
+      context: .
+    ports:
+      - 8888:8080 
+    environment:
+      - SCALE_SERVER_PORT=8808
+      - SCALE_CLASSIFIER_HOST=http://pyworker:8807
