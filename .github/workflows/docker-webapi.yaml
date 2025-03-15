@@ -15,7 +15,7 @@ jobs:
       context: ./apps
       dockerfile: ./apps/webapi/Dockerfile
       push: ${{ startsWith(github.ref, 'refs/tags/v') }}
-      image: gldraphael/scale-webapi
+      image: gldraphael/scale/webapi
     permissions:
       contents: read
       packages: write
