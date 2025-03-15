@@ -1,6 +1,7 @@
 include:
   - ./apps/pyworker/compose.yaml
   - ./apps/webapi/compose.yaml
+  - ./apps/reactapp/compose.yaml
 
 # services:
 #   debug:

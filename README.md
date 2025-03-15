@@ -7,7 +7,7 @@
 ```sh
 docker compose build
 docker compose start
-# Browse to localhost:8808
+# Browse to localhost:8888
 ```
 
 ## Dataset
