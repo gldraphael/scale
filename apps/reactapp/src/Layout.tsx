@@ -31,10 +31,13 @@ export default function Layout() {
               <Flex className='footer' gap="4" my="4" align="center" >
                   <Text size="1" mr="auto">
                   This project is <Link href={GITHUB_URL}>open source</Link>.<br/>
-                  To read about dataset limitations, <Link href="#">click here</Link>. 
+                  To read about dataset limitations, <Link href="https://github.com/gldraphael/scale/blob/main/dataset/README.md">click here</Link>. 
                   </Text>
                   <Box pt="7px">
-                    <GitHubButton href="https://github.com/gldraphael/scale" data-color-scheme="no-preference: light; light: light; dark: dark;" aria-label="Star gldraphael/scale on GitHub">&nbsp;Star</GitHubButton>
+                    <GitHubButton 
+                        href="https://github.com/gldraphael/scale" 
+                        data-color-scheme="no-preference: light; light: light; dark: dark;" 
+                        aria-label="Star gldraphael/scale on GitHub">&nbsp;Star</GitHubButton>
                   </Box>
                   
               </Flex>
