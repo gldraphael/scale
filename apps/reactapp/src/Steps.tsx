@@ -1,4 +1,4 @@
-import { Flex, Text, Link, Button, Box, TextField, RadioCards } from "@radix-ui/themes";
+import { Flex, Text, Link, Button, Box, TextField, RadioGroup } from "@radix-ui/themes";
 import { useState } from 'react';
 import { ApiService, Frequency, ObesityLevel, Sex, Transportation } from "./services/ApiService";
 
@@ -64,18 +64,18 @@ export default function Steps({ githubUrl }: {githubUrl: string}){
 
           <Box>
             <label>Sex</label>
-            <RadioCards.Root
+            <RadioGroup.Root
               value={sex}
               onValueChange={val => setSex(val as Sex)}
               aria-label="Sex"
             >
-              <RadioCards.Item value="male">
+              <RadioGroup.Item value="male">
                 <label>Male</label>
-              </RadioCards.Item>
-              <RadioCards.Item value="female">
+              </RadioGroup.Item>
+              <RadioGroup.Item value="female">
                 <label>Female</label>
-              </RadioCards.Item>
-            </RadioCards.Root>
+              </RadioGroup.Item>
+            </RadioGroup.Root>
           </Box>
 
           <Box>
@@ -101,18 +101,18 @@ export default function Steps({ githubUrl }: {githubUrl: string}){
 
           <Box>
             <label>Does your family have a history of overweight or obesity, such as in your parents or other close relatives?</label>
-            <RadioCards.Root
+            <RadioGroup.Root
               value={hasFamilyHistory.toString()}
               onValueChange={(val) => setHasFamilyHistory(val.toLowerCase() == 'true')}
               aria-label="Sex"
             >
-              <RadioCards.Item value='true'>
+              <RadioGroup.Item value='true'>
                 <label>Yes</label>
-              </RadioCards.Item>
-              <RadioCards.Item value='false'>
+              </RadioGroup.Item>
+              <RadioGroup.Item value='false'>
                 <label>No</label>
-              </RadioCards.Item>
-            </RadioCards.Root>
+              </RadioGroup.Item>
+            </RadioGroup.Root>
           </Box>
 
             <Button onClick={() => setCurrentStep(currentStep+1)}>Next</Button>
@@ -125,40 +125,24 @@ export default function Steps({ githubUrl }: {githubUrl: string}){
 
             <Box>
               <label>Do you monitor your calorie intake?</label>
-              <RadioCards.Root autoFocus
+              <RadioGroup.Root
                 value={monitorsCalories.toString()}
                 onValueChange={(val) => setMonitorsCalories(val.toLowerCase() == 'true')}
                 aria-label="Do you monitor calories?"
               >
-                <RadioCards.Item value='true'>
+                <RadioGroup.Item value='true' autoFocus>
                   <label>Yes</label>
-                </RadioCards.Item>
-                <RadioCards.Item value='false'>
+                </RadioGroup.Item>
+                <RadioGroup.Item value='false'>
                   <label>No</label>
-                </RadioCards.Item>
-              </RadioCards.Root>
+                </RadioGroup.Item>
+              </RadioGroup.Root>
             </Box>
-
-            {/* <Box>
-              <label>How often do you eat foods that are high in calories?</label>
-              <RadioCards.Root
-                value={hasFamilyHistory.toString()} // freq
-                onValueChange={(val) => setHasFamilyHistory(val.toLowerCase() == 'true')}
-                aria-label="Hih calorie food frequency"
-              >
-                <RadioCards.Item value='true'>
-                  <label>Yes</label>
-                </RadioCards.Item>
-                <RadioCards.Item value='false'>
-                  <label>No</label>
-                </RadioCards.Item>
-              </RadioCards.Root>
-            </Box> */}
 
             
             <Box>
               <label>How many main meals do you typically eat in a day</label>
-              <TextField.Root
+              <TextField.Root autoFocus
                 type="number"
                 min={1}
                 max={5}
@@ -182,15 +166,15 @@ export default function Steps({ githubUrl }: {githubUrl: string}){
 
             <Box>
               <label>Do you usually snack or eat anything between your main meals?</label>
-              <RadioCards.Root
-                defaultValue={foodBwMeals} // freq
+              <RadioGroup.Root
+                defaultValue={foodBwMeals}
                 onValueChange={val => setFoodBwMeals(val as Frequency)}
                 aria-label="Number of snack meals">
-                  <RadioCards.Item value="never"><label>Never</label></RadioCards.Item>
-                  <RadioCards.Item value="sometimes"><label>Sometimes</label></RadioCards.Item>
-                  <RadioCards.Item value="frequently"><label>Frequently</label></RadioCards.Item>
-                  <RadioCards.Item value="always"><label>Always</label></RadioCards.Item>
-                </RadioCards.Root>
+                  <RadioGroup.Item value="never"><label>Never</label></RadioGroup.Item>
+                  <RadioGroup.Item value="sometimes"><label>Sometimes</label></RadioGroup.Item>
+                  <RadioGroup.Item value="frequently"><label>Frequently</label></RadioGroup.Item>
+                  <RadioGroup.Item value="always"><label>Always</label></RadioGroup.Item>
+                </RadioGroup.Root>
             </Box>
 
             <Box>
@@ -215,32 +199,32 @@ export default function Steps({ githubUrl }: {githubUrl: string}){
 
             <Box>
               <label>Do you smoke?</label>
-              <RadioCards.Root
+              <RadioGroup.Root
                 value={isSmoker.toString()}
                 onValueChange={(val) => setIsSmoker(val.toLowerCase() == 'true')}
                 aria-label="Do you smoke?"
               >
-                <RadioCards.Item value='true'>
+                <RadioGroup.Item value='true'>
                   <label>Yes</label>
-                </RadioCards.Item>
-                <RadioCards.Item value='false'>
+                </RadioGroup.Item>
+                <RadioGroup.Item value='false'>
                   <label>No</label>
-                </RadioCards.Item>
-              </RadioCards.Root>
+                </RadioGroup.Item>
+              </RadioGroup.Root>
             </Box>
 
             <Box>
               <label>How often do you consume alcohol?</label>
-              <RadioCards.Root
+              <RadioGroup.Root
                 value={alcoholFreq}
                 onValueChange={val => setAlcoholFreq(val as Frequency)}
                 aria-label="Alcohol consumption frequency"
               >
-                <RadioCards.Item value="never"><label>Never</label></RadioCards.Item>
-                <RadioCards.Item value="sometimes"><label>Sometimes</label></RadioCards.Item>
-                <RadioCards.Item value="frequently"><label>Frequently</label></RadioCards.Item>
-                <RadioCards.Item value="always"><label>Always</label></RadioCards.Item>
-              </RadioCards.Root>
+                <RadioGroup.Item value="never"><label>Never</label></RadioGroup.Item>
+                <RadioGroup.Item value="sometimes"><label>Sometimes</label></RadioGroup.Item>
+                <RadioGroup.Item value="frequently"><label>Frequently</label></RadioGroup.Item>
+                <RadioGroup.Item value="always"><label>Always</label></RadioGroup.Item>
+              </RadioGroup.Root>
             </Box>
 
             <Box>
@@ -270,17 +254,17 @@ export default function Steps({ githubUrl }: {githubUrl: string}){
 
             <Box>
               <label>How do you usually travel?</label>
-              <RadioCards.Root
+              <RadioGroup.Root
                 value={travel}
                 onValueChange={val => setTravel(val as Transportation)}
                 aria-label="Travel"
               >
-                <RadioCards.Item value="walking"><label>Walking</label></RadioCards.Item>
-                <RadioCards.Item value="public_transportation"><label>Public transportation</label></RadioCards.Item>
-                <RadioCards.Item value="bike"><label>Bike</label></RadioCards.Item>
-                <RadioCards.Item value="motorbike"><label>Motorbike</label></RadioCards.Item>
-                <RadioCards.Item value="automobile"><label>Automobile</label></RadioCards.Item>
-              </RadioCards.Root>
+                <RadioGroup.Item value="walking"><label>Walking</label></RadioGroup.Item>
+                <RadioGroup.Item value="public_transportation"><label>Public transportation</label></RadioGroup.Item>
+                <RadioGroup.Item value="bike"><label>Bike</label></RadioGroup.Item>
+                <RadioGroup.Item value="motorbike"><label>Motorbike</label></RadioGroup.Item>
+                <RadioGroup.Item value="automobile"><label>Automobile</label></RadioGroup.Item>
+              </RadioGroup.Root>
             </Box>
             <Button onClick={
               async () => {
