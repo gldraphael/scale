@@ -30,7 +30,7 @@ export default function Steps({ githubUrl }: {githubUrl: string}){
     switch(currentStep) {
       case 0:
         return (
-          <Flex id="step0" direction="column" gap="4" p="4">
+          <Flex key="step0" direction="column" gap="4" p="4">
             <Text>
               This is an experimental classifier designed to predict obesity levels using a range of metrics beyond just height and weight.
             </Text>
@@ -46,7 +46,7 @@ export default function Steps({ githubUrl }: {githubUrl: string}){
         )
       case 1:
         return (
-          <Flex id="step1" direction="column" gap="4" p="4">
+          <Flex key="step1" direction="column" gap="4" p="4">
             <Text size="5"></Text>
 
             <Box>
@@ -120,7 +120,7 @@ export default function Steps({ githubUrl }: {githubUrl: string}){
         )
       case 2:
         return (
-          <Flex id="step2" direction="column" gap="4" p="4">
+          <Flex key="step2" direction="column" gap="4" p="4">
             <Text size="5">Diet</Text> 
 
             <Box>
@@ -195,7 +195,7 @@ export default function Steps({ githubUrl }: {githubUrl: string}){
         )
       case 3:
         return (
-          <Flex id="step3" direction="column" gap="4" p="4">
+          <Flex key="step3" direction="column" gap="4" p="4">
             <Text size="5">Lifestyle</Text>                         
 
             <Box>
@@ -292,7 +292,7 @@ export default function Steps({ githubUrl }: {githubUrl: string}){
         )
       case 4:
         return(
-          <Flex id="step4" direction="column">
+          <Flex key="step4" direction="column">
             <Box height="200px">
               {response}
             </Box>
