@@ -1,10 +1,11 @@
 # Stage 1: build
 FROM node:18-alpine AS builder
+RUN corepack enable
 WORKDIR /app
-COPY package*.json ./
-RUN npm install
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install
 COPY . .
-RUN npm run build
+RUN pnpm run build
  
 # Stage 2: final
 FROM nginxinc/nginx-unprivileged:stable-alpine-slim AS final
