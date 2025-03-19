@@ -7,7 +7,7 @@ export default function Steps({ githubUrl }: {githubUrl: string}){
 
     const [age, setAge] = useState(18);
     const [sex, setSex] = useState<Sex>('male');
-    const [height, setHeight] = useState(185);
+    const [height, setHeight] = useState(180);
     const [weight, setWeight] = useState(65);
     const [hasFamilyHistory, setHasFamilyHistory] = useState(false);
 
@@ -30,7 +30,7 @@ export default function Steps({ githubUrl }: {githubUrl: string}){
     switch(currentStep) {
       case 0:
         return (
-          <Flex direction="column" gap="4" p="4">
+          <Flex id="step0" direction="column" gap="4" p="4">
             <Text>
               This is an experimental classifier designed to predict obesity levels using a range of metrics beyond just height and weight.
             </Text>
@@ -46,81 +46,81 @@ export default function Steps({ githubUrl }: {githubUrl: string}){
         )
       case 1:
         return (
-          <Flex direction="column" gap="4" p="4">
+          <Flex id="step1" direction="column" gap="4" p="4">
             <Text size="5"></Text>
 
-          <Box>
-            <label>Your age</label>
-            <TextField.Root
-              autoFocus
-              type="number"
-              min="12"
-              max={120}
-              defaultValue={age}
-              onChange={(e) => setAge(Number.parseInt(e.target.value))}
-              aria-label="Age"
-            />
-          </Box>
+            <Box>
+              <label>Your age</label>
+              <TextField.Root
+                autoFocus
+                type="number"
+                min="12"
+                max={120}
+                defaultValue={age}
+                onChange={(e) => setAge(Number.parseInt(e.target.value))}
+                aria-label="Age"
+              />
+            </Box>
 
-          <Box>
-            <label>Sex</label>
-            <RadioGroup.Root
-              value={sex}
-              onValueChange={val => setSex(val as Sex)}
-              aria-label="Sex"
-            >
-              <RadioGroup.Item value="male">
-                <label>Male</label>
-              </RadioGroup.Item>
-              <RadioGroup.Item value="female">
-                <label>Female</label>
-              </RadioGroup.Item>
-            </RadioGroup.Root>
-          </Box>
+            <Box>
+              <label>Sex</label>
+              <RadioGroup.Root
+                value={sex}
+                onValueChange={val => setSex(val as Sex)}
+                aria-label="Sex"
+              >
+                <RadioGroup.Item value="male">
+                  <label>Male</label>
+                </RadioGroup.Item>
+                <RadioGroup.Item value="female">
+                  <label>Female</label>
+                </RadioGroup.Item>
+              </RadioGroup.Root>
+            </Box>
 
-          <Box>
-            <label>Height (cm)</label>
-            <TextField.Root
-              type="number"
-              min={100}
-              max={200}
-              defaultValue={height}
-              onChange={(e) => setHeight(Number.parseInt(e.target.value))}
-              aria-label="Height"
-            />
-          </Box>
+            <Box>
+              <label>Height (cm)</label>
+              <TextField.Root
+                type="number"
+                min={100}
+                max={200}
+                defaultValue={height}
+                onChange={(e) => setHeight(Number.parseInt(e.target.value))}
+                aria-label="Height"
+              />
+            </Box>
 
-          <Box>
-            <label>Weight (kg)</label>
-            <TextField.Root
-              defaultValue={weight}
-              onChange={(e) => setWeight(Number.parseInt(e.target.value))}
-              aria-label="Weight"
-            />
-          </Box>
+            <Box>
+              <label>Weight (kg)</label>
+              <TextField.Root
+                defaultValue={weight}
+                onChange={(e) => setWeight(Number.parseInt(e.target.value))}
+                aria-label="Weight"
+              />
+            </Box>
 
-          <Box>
-            <label>Does your family have a history of overweight or obesity, such as in your parents or other close relatives?</label>
-            <RadioGroup.Root
-              value={hasFamilyHistory.toString()}
-              onValueChange={(val) => setHasFamilyHistory(val.toLowerCase() == 'true')}
-              aria-label="Sex"
-            >
-              <RadioGroup.Item value='true'>
-                <label>Yes</label>
-              </RadioGroup.Item>
-              <RadioGroup.Item value='false'>
-                <label>No</label>
-              </RadioGroup.Item>
-            </RadioGroup.Root>
-          </Box>
+            <Box>
+              <label>Does your family have a history of overweight or obesity, such as in your parents or other close relatives?</label>
+              <RadioGroup.Root
+                value={hasFamilyHistory.toString()}
+                onValueChange={(val) => setHasFamilyHistory(val.toLowerCase() == 'true')}
+                aria-label="Sex"
+              >
+                <RadioGroup.Item value='true'>
+                  <label>Yes</label>
+                </RadioGroup.Item>
+                <RadioGroup.Item value='false'>
+                  <label>No</label>
+                </RadioGroup.Item>
+              </RadioGroup.Root>
+            </Box>
 
             <Button onClick={() => setCurrentStep(currentStep+1)}>Next</Button>
           </Flex>
         )
       case 2:
         return (
-          <Flex direction="column" gap="4" p="4">
+          <Flex id="step2" direction="column" gap="4" p="4">
             <Text size="5">Diet</Text> 
 
             <Box>
@@ -142,7 +142,7 @@ export default function Steps({ githubUrl }: {githubUrl: string}){
             
             <Box>
               <label>How many main meals do you typically eat in a day</label>
-              <TextField.Root autoFocus
+              <TextField.Root
                 type="number"
                 min={1}
                 max={5}
@@ -155,6 +155,7 @@ export default function Steps({ githubUrl }: {githubUrl: string}){
             <Box>
               <label>How many of these meals include vegetables?</label>
               <TextField.Root
+                id="numMealsWithVeg"
                 type="number"
                 min={0}
                 max={numMainMeals}
@@ -194,7 +195,7 @@ export default function Steps({ githubUrl }: {githubUrl: string}){
         )
       case 3:
         return (
-          <Flex direction="column" gap="4" p="4">
+          <Flex id="step3" direction="column" gap="4" p="4">
             <Text size="5">Lifestyle</Text>                         
 
             <Box>
@@ -204,7 +205,7 @@ export default function Steps({ githubUrl }: {githubUrl: string}){
                 onValueChange={(val) => setIsSmoker(val.toLowerCase() == 'true')}
                 aria-label="Do you smoke?"
               >
-                <RadioGroup.Item value='true'>
+                <RadioGroup.Item value='true' autoFocus>
                   <label>Yes</label>
                 </RadioGroup.Item>
                 <RadioGroup.Item value='false'>
@@ -230,10 +231,10 @@ export default function Steps({ githubUrl }: {githubUrl: string}){
             <Box>
             <label>How often do you engage in physical activity?</label>
             <TextField.Root
+              id="txtPhysicalActivity"
               type="number"
               min={0}
               max={3}
-              autoFocus
               defaultValue={physicalActivityFreq}
               onChange={(e) => setPhysicalActivityFreq(Number.parseInt(e.target.value))}
               aria-label="Age"
@@ -291,7 +292,7 @@ export default function Steps({ githubUrl }: {githubUrl: string}){
         )
       case 4:
         return(
-          <Flex direction="column">
+          <Flex id="step4" direction="column">
             <Box height="200px">
               {response}
             </Box>
