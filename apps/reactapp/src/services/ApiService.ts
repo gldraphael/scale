@@ -30,7 +30,7 @@ export class ApiService {
 export type Sex = 'male' | 'female'
 export type Frequency = 'never' | 'sometimes' | 'frequently' | 'always'
 export type Transportation = 'walking' | 'bike' | 'motorbike' | 'public_transportation' | 'automobile' 
-export type ObesityLevel = "insufficient_weight" | "normal_weight" | "overweight_level_1" | "overweight_level_2" | "overweight_level_3" | "obesity_type_1" | "obesity_type_1" | "obesity_type_3"
+export type ObesityLevel = "insufficient_weight" | "normal_weight" | "overweight_level_1" | "overweight_level_2" | "obesity_type_1" | "obesity_type_2" | "obesity_type_3"
 
 interface ClassificationRequest {
   age: number
@@ -51,6 +51,6 @@ interface ClassificationRequest {
   transportation: Transportation
 }
 
-interface ClassificationResponse {
+export interface ClassificationResponse {
     level: ObesityLevel
 }
