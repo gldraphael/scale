@@ -24,7 +24,7 @@ export default function Layout() {
 
               <Flex mb="auto" mt="auto" >
                 <Card>
-                  <Steps githubUrl={GITHUB_URL} />
+                  <Steps  />
                 </Card>
               </Flex>
 

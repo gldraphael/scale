@@ -1,8 +1,10 @@
-import { Flex, Text, Link, Button, Box, TextField, RadioGroup } from "@radix-ui/themes";
+import { Flex, Text, Button, Box, TextField, RadioGroup, Code, Callout } from "@radix-ui/themes";
+import { ExclamationTriangleIcon } from "@radix-ui/react-icons"
 import { useState } from 'react';
-import { ApiService, Frequency, ObesityLevel, Sex, Transportation } from "./services/ApiService";
+import { ApiService, ClassificationResponse, Frequency, Sex, Transportation } from "./services/ApiService";
+import { Results } from "./Results";
 
-export default function Steps({ githubUrl }: {githubUrl: string}){
+export default function Steps(){
     const [currentStep, setCurrentStep] = useState(0)
 
     const [age, setAge] = useState(18);
@@ -23,22 +25,30 @@ export default function Steps({ githubUrl }: {githubUrl: string}){
     const [physicalActivityFreq, setPhysicalActivityFreq] = useState(1)
     const [travel, setTravel] = useState<Transportation>("automobile")
 
-    const [response, setResponse] = useState<ObesityLevel|null>(null);
+    const [response, setResponse] = useState<ClassificationResponse|null>(null);
     
     const api = new ApiService()
+
+    if(response == null) {
+      setResponse({
+        level: "insufficient_weight"
+      })
+      setCurrentStep(4)
+    }
+    
 
     switch(currentStep) {
       case 0:
         return (
           <Flex key="step0" direction="column" gap="4" p="4">
             <Text>
-              This is an experimental classifier designed to predict obesity levels using a range of metrics beyond just height and weight.
+              <Code>scale</Code> is an experimental classifier designed to predict obesity levels using a range of metrics beyond just height and weight.
             </Text>
             <Text>
-              Details about the dataset, model training, and implementation are available <Link href={githubUrl}>here</Link>. 
+              This is not medical advice.
             </Text>
             <Text>
-              Feel free to play with different input values. 
+              Feel free to play with different input values to see how the tool responds.  
             </Text>
             <Button autoFocus onClick={() => setCurrentStep(currentStep+1)}>Ok, I'm ready!</Button>
             
@@ -269,34 +279,45 @@ export default function Steps({ githubUrl }: {githubUrl: string}){
             </Box>
             <Button onClick={
               async () => {
-                  setResponse((await api.classify({
-                    age: age,
-                    food_bw_meals: foodBwMeals,
-                    sex: sex,
-                    weight: weight,
-                    height: height,
-                    alcohol_freq: alcoholFreq,
-                    is_smoker: isSmoker,
-                    monitors_calories: monitorsCalories,
-                    num_meals: numMainMeals,
-                    veg_in_meals: numMainMealsWithVeg,
-                    physical_act_freq: physicalActivityFreq,
-                    screen_time: screenTime,
-                    transportation: travel,
-                    water_intake: waterIntake
-                  })).level)
+                const response = (await api.classify({
+                  age: age,
+                  food_bw_meals: foodBwMeals,
+                  sex: sex,
+                  weight: weight,
+                  height: height,
+                  alcohol_freq: alcoholFreq,
+                  is_smoker: isSmoker,
+                  monitors_calories: monitorsCalories,
+                  num_meals: numMainMeals,
+                  veg_in_meals: numMainMealsWithVeg,
+                  physical_act_freq: physicalActivityFreq,
+                  screen_time: screenTime,
+                  transportation: travel,
+                  water_intake: waterIntake
+                }))
+                if(response != null) {
+                  setResponse(response)
                   setCurrentStep(currentStep + 1)
                 }
-              }>Submit</Button>
+              }
+            }>Submit</Button>
           </Flex>
         )
       case 4:
+        if(response == null) {
+          return (
+            <Callout.Root>
+              <Callout.Icon>
+                <ExclamationTriangleIcon />
+              </Callout.Icon>
+              <Callout.Text>
+              Something went wrong.
+              </Callout.Text>
+            </Callout.Root>
+          )
+        }
         return(
-          <Flex key="step4" direction="column">
-            <Box height="200px">
-              {response}
-            </Box>
-          </Flex>
+          <Results result={response} />
         )
         
       default:
