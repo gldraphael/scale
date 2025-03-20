@@ -29,14 +29,6 @@ export default function Steps(){
     
     const api = new ApiService()
 
-    if(response == null) {
-      setResponse({
-        level: "insufficient_weight"
-      })
-      setCurrentStep(4)
-    }
-    
-
     switch(currentStep) {
       case 0:
         return (
