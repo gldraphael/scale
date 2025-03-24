@@ -13,12 +13,14 @@ message ClassifyObesityLevelRequest {
     float weight                   = 4;
     float veg_in_meals             = 5;
     uint32 num_meals               = 6;
-    Frequency food_bw_meals = 7;
+    Frequency food_bw_meals        = 7;
     bool is_smoker                 = 8;
     float water_intake             = 9;
     bool monitors_calories         = 10;
     float physical_act_freq        = 11;
     float screen_time              = 12;
-    Frequency alcohol_freq  = 13;
+    Frequency alcohol_freq         = 13;
     Transportation transportation  = 14;
+    bool has_family_history        = 15;
+    bool freq_high_calorie_intake  = 16;
 }

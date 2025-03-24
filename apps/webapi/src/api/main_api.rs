@@ -48,7 +48,9 @@ async fn classify(State(config): State<Config>, Json(req): Json<ClassificationRe
             monitors_calories: req.monitors_calories,
             screen_time: req.screen_time,
             alcohol_freq: gen::Frequency::from_repr(req.alcohol_freq as i32).unwrap().into(),
-            transportation: gen::Transportation::from_repr(req.transportation as i32).unwrap().into()
+            transportation: gen::Transportation::from_repr(req.transportation as i32).unwrap().into(),
+            has_family_history: req.has_family_history,
+            freq_high_calorie_intake: req.has_high_calorie_diet
         });
         
         let response = client.classify_obesity_level(request).await.unwrap();
@@ -72,7 +74,9 @@ struct ClassificationRequest {
     physical_act_freq: f32,
     screen_time: f32,
     alcohol_freq: AlcoholFrequency,
-    transportation: Transportation
+    transportation: Transportation,
+    has_family_history: bool,
+    has_high_calorie_diet: bool
 }
 
 #[derive(Serialize, ToSchema)]
