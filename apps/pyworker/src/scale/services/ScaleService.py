@@ -18,7 +18,7 @@ class ScaleService(ScaleServiceBase):
         if ScaleService.__clf is None:
             raise ValueError("The model was not loaded. Did you call ScaleService.load()?")
         
-        user_input_values = [request.sex.name.lower(),request.age,request.height,request.weight,False,False,request.veg_in_meals,request.num_meals,request.food_bw_meals.name.lower(),request.is_smoker,request.water_intake,request.monitors_calories,request.physical_act_freq,request.screen_time,request.alcohol_freq.name.lower(),request.transportation.name.lower()]
+        user_input_values = [request.sex.name.lower(),request.age,request.height,request.weight,request.has_family_history,request.freq_high_calorie_intake,request.veg_in_meals,request.num_meals,request.food_bw_meals.name.lower(),request.is_smoker,request.water_intake,request.monitors_calories,request.physical_act_freq,request.screen_time,request.alcohol_freq.name.lower(),request.transportation.name.lower()]
         print(user_input_values)
         encoded_user_input_values = [ScaleService.__mapper.encode(i) for i in user_input_values]
         model_input = DataFrame([encoded_user_input_values], columns=ScaleService.__feature_names)

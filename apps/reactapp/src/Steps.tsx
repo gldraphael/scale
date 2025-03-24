@@ -13,6 +13,7 @@ export default function Steps(){
     const [weight, setWeight] = useState(65);
     const [hasFamilyHistory, setHasFamilyHistory] = useState(false);
 
+    const [hasHighCalorieDiet, setHasHighCalorieDiet] = useState(false)
     const [waterIntake, setWaterIntake] = useState(2.5);
     const [monitorsCalories, setMonitorsCalories] = useState(false);
     const [numMainMeals, setNumMainMeals] = useState(3);
@@ -141,6 +142,21 @@ export default function Steps(){
               </RadioGroup.Root>
             </Box>
 
+            <Box>
+              <label>Do you frequently have high calorie meals?</label>
+              <RadioGroup.Root
+                value={hasHighCalorieDiet.toString()}
+                onValueChange={(val) => setHasHighCalorieDiet(val.toLowerCase() == 'true')}
+                aria-label="Do you frequently have high calorie meals?"
+              >
+                <RadioGroup.Item value='true' autoFocus>
+                  <label>Yes</label>
+                </RadioGroup.Item>
+                <RadioGroup.Item value='false'>
+                  <label>No</label>
+                </RadioGroup.Item>
+              </RadioGroup.Root>
+            </Box>
             
             <Box>
               <label>How many main meals do you typically eat in a day</label>
@@ -285,7 +301,9 @@ export default function Steps(){
                   physical_act_freq: physicalActivityFreq,
                   screen_time: screenTime,
                   transportation: travel,
-                  water_intake: waterIntake
+                  water_intake: waterIntake,
+                  has_family_history: hasFamilyHistory,
+                  has_high_calorie_diet: hasHighCalorieDiet
                 }))
                 if(response != null) {
                   setResponse(response)

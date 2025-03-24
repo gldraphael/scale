@@ -21,6 +21,8 @@ export class ApiService {
               transportation: req.transportation,
               veg_in_meals: req.veg_in_meals,
               water_intake: req.water_intake,
+              has_family_history: req.has_family_history,
+              has_high_calorie_diet: req.has_high_calorie_diet
             })
           })
         return await response.json() as ClassificationResponse
@@ -37,7 +39,9 @@ interface ClassificationRequest {
   sex: Sex
   weight: number
   height: number
-
+  
+  has_family_history: boolean
+  has_high_calorie_diet: boolean
   monitors_calories: boolean
   num_meals: number
   veg_in_meals: number
