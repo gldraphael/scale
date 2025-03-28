@@ -36,6 +36,6 @@
       "PYTHONUNBUFFERED": "True",
       "UV_LINK_MODE": "copy"
   },
-  // "postCreateCommand": "./post-create.sh",
+  "postCreateCommand": "./.devcontainer/post-create.sh",
   "remoteUser": "vscode"
 }
