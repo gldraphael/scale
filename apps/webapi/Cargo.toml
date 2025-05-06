@@ -5,7 +5,7 @@ edition = "2021"
 
 
 [dependencies]
-axum = { version = "0.8.3", features = ["macros"] }
+axum = { version = "0.8.4", features = ["macros"] }
 config = "0.15.11"
 prost = "0.13.5"
 serde = { version = "1.0", features = ["derive"] }
